@@ -1,8 +1,56 @@
-var formattedName = HTMLheaderName.replace("%data%","Luna Yao");
-var formattedRole = HTMLheaderRole.replace("%data%","Front-end Web Developer");
 
-$("#main").prepend(formattedRole);
-$("#main").prepend(formattedName);
+//objects
+var bio = {
+	"name": "Luna Yao",
+	"role": "Explorer",
+	"welcome message": "Hello.",
+	"contacts": {
+		"mobile": "206-xxx-xxxx",
+		"email": "xxx@hotmail.com",
+		"github": "lupuppy",
+		"location": "3701 NE 45th St, Seattle, WA 98105"
+	},
+	"skills": ["create cool dreams", "build cute robots", "explore new worlds"],
+	
+	"display": function() {
+		//name
+			var formattedName = HTMLheaderName.replace("%data%", bio.name);
+			var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
+			$("#header").prepend(formattedRole);
+			$("#header").prepend(formattedName);
+		//contacts
+			var formattedmobile = HTMLmobile.replace("%data%",bio.contacts.mobile);
+			$("#topContacts").append(formattedmobile);
+			$("#footerContacts").prepend(formattedmobile);
+
+			var formattedemail = HTMLemail.replace("%data%",bio.contacts.email);
+			$("#topContacts").append(formattedemail);
+			$("#footerContacts").prepend(formattedemail);
+
+			var formattedgithub = HTMLgithub.replace("%data%",bio.contacts.github);
+			$("#topContacts").append(formattedgithub);
+			$("#footerContacts").prepend(formattedgithub);
+
+			var formattedlocation = HTMLlocation.replace("%data%",bio.contacts.location);
+			$("#topContacts").append(formattedlocation);
+			$("#footerContacts").prepend(formattedlocation);
+		//my picture
+			var formattedbioPic = HTMLbioPic.replace("%data%", "images/puppy.jpg");
+			$("#header").append(formattedbioPic);
+		//Skills
+			if (bio.skills.length > 0) {
+				$("#header").append(HTMLskillsStart);
+
+				for (var i = 0; i < bio.skills.length; i++) {
+					var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+					$("#skills").append(formattedSkill);
+				}
+			}
+		//welcome message
+			var formattedWelcome = HTMLWelcomeMsg.replace("%data%",bio["welcome message"]);
+			$("#skills").append(formattedWelcome);
+	}
+}
 
 var work = {
 	"jobs": [
@@ -27,7 +75,23 @@ var work = {
 		"description":"I served as a student board member (as the event chair), led facilitator and voting trustee with Foundation for FIUTS, a non-profit organization, for three years. It builds cross-cultural communication among international students and local communities. Specifically, I organized events that cultivate mutual understanding among people of diverse cultural backgrounds; served as an international student representative to impact policy changes on-campus and managed a diverse team of facilitators. ",
 		"location":"University of Washington, HUB 206, Box 352233, Seattle, WA 98195-2233 USA"
 	}
-	]
+	],
+	"display": function() {
+		for (job in work.jobs) {
+			$("#workExperience").append(HTMLworkStart);
+			
+			var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+			var formattedworkTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+			var formattedEmployerTitle = formattedEmployer + formattedworkTitle;
+
+			var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+			var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+			$(".work-entry:last").append(formattedEmployerTitle);
+			$(".work-entry:last").append(formattedDates);
+			$(".work-entry:last").append(formattedDescription);	
+		}
+	}
 }
 
 var projects = {
@@ -44,19 +108,27 @@ var projects = {
 		"description": "My role in the HINTS lab gave me first-hand experience in understanding the necessity of combining design and research. I actively engaged in the NSF project from experimental design, human/robot interaction design, to data collecting and analysis. We used a human-sized robot named Robovie. An important part of our project was to improve the social interaction between the robot and the user, in a way that would enhance human creativity. As a result, our team created a series of speech and locomotion patterns, or interaction patterns, so the robot could interact with the users.",
 		"images": ["images/robovie.jpg"]	
 	}
-	]
-}
+	],
+	"display": function() {
 
-var bio = {
-	"name": "Luna Yao",
-	"role": "Explorer",
-	"welcome message": "Hello.",
-	"contacts": {
-		"mobile": "206-xxx-xxxx",
-		"email": "xxx@hotmail.com",
-		"location": "3701 NE 45th St, Seattle, WA 98105"
-	},
-	"skills": ["create", "build", "research"]
+		for (project in projects.projects) {
+			$("#projects").append(HTMLprojectStart);
+
+			var formattedprojectTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+			$(".project-entry:last").append(formattedprojectTitle);
+
+			var formattedprojectDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+			$(".project-entry:last").append(formattedprojectDates);
+
+			var formattedprojectDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+			$(".project-entry:last").append(formattedprojectDescription);
+
+			for (var i = 0; i < projects.projects[project].images.length; i++) {
+				var formattedprojectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[i]);
+				$(".project-entry:last").append(formattedprojectImage);
+			}
+		}
+	}
 }
 
 var education = {
@@ -85,175 +157,68 @@ var education = {
 		"dates": "Feburary 2014-present",
 		"url": "https://www.udacity.com/"
 	}
-	]
+	],
+	"display": function() {
+	$("#education").append(HTMLschoolStart);
+
+	for (var i = 0; i < education.schools.length; i++) {
+
+		var formattedschoolName = HTMLschoolName.replace("%data%",education.schools[i].name);
+		$(".education-entry").append(formattedschoolName);
+
+		var formattedschoolDegree = HTMLschoolDegree.replace("%data%",education.schools[i].degree);
+		$(".education-entry").append(formattedschoolDegree);
+
+		var formattedschoolDates = HTMLschoolDates.replace("%data%",education.schools[i].dates);
+		$(".education-entry").append(formattedschoolDates);
+
+		var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
+		$(".education-entry").append(formattedschoolLocation);
+
+		var formattedschoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].majors);
+		$(".education-entry").append(formattedschoolMajor);
+	}
+	//display education.onlineCourses
+	$(".education-entry").append(HTMLonlineClasses);
+
+	for (var i = 0; i < education.onlineCourses.length; i++) {
+		var formattedonlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
+		$(".education-entry").append(formattedonlineTitle);
+
+		var formattedonlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].School);
+		$(".education-entry").append(formattedonlineSchool);
+
+		var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
+		$(".education-entry").append(formattedonlineDates);
+
+		var formattedonlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
+		$(".education-entry").append(formattedonlineURL);
+	}
 }
-
-if(bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-
-	
-	var formattedbioPic = HTMLbioPic.replace("%data%", "images/puppy.jpg");
-	$("#skillsH3").append(formattedbioPic);
-
-	var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-	$("#skills").append(formattedSkill);
-
-	formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-	$("#skills").append(formattedSkill);
-	
-	formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-	$("#skills").append(formattedSkill);
 }
+//end of objects
 
-for(job in work.jobs) {
-	$("#workExperience").append(HTMLworkStart);
-	
-	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-	var formattedworkTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-	var formattedEmployerTitle = formattedEmployer + formattedworkTitle;
 
-	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+// calling functions
+bio.display();
+work.display();
+projects.display();
+education.display();
+//end of calling functions
 
-	$(".work-entry:last").append(formattedEmployerTitle);
-	$(".work-entry:last").append(formattedDates);
-	$(".work-entry:last").append(formattedDescription);	
-}
 
+//internationalized button
 $("#main").append(internationalizeButton);
+var myName = bio.name;
 function inName(name){
 	name = name.trim().split(" ");
 	name[0] = name[0].slice(0, 1).toUpperCase() + name[0].slice(1).toLowerCase();
 	name[1] = name[1].toUpperCase();
 
 	return name[0] + " " + name[1];
-
 }
 
-projects.display = function() {
-
-	for(project in projects.projects){
-		$("#projects").append(HTMLprojectStart);
-
-		var formattedprojectTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-		$(".project-entry:last").append(formattedprojectTitle);
-
-		var formattedprojectDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-		$(".project-entry:last").append(formattedprojectDates);
-
-		var formattedprojectDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-		$(".project-entry:last").append(formattedprojectDescription);
-
-		for(var i = 0; i < projects.projects[project].images.length; i++){
-			var formattedprojectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[i]);
-			$(".project-entry:last").append(formattedprojectImage);
-		}
-
-	}
-}
-
-projects.display();
+//add a map
 $("#mapDiv").append(googleMap);
-
-
-psinsights = {
- "kind": "pagespeedonline#result",
- "id": "/speed/pagespeed",
- "responseCode": 200,
- "title": "PageSpeed Home",
- "score": 90,
- "pageStats": {
-  "numberResources": 22,
-  "numberHosts": 7,
-  "totalRequestBytes": "2761",
-  "numberStaticResources": 16,
-  "htmlResponseBytes": "91981",
-  "cssResponseBytes": "37728",
-  "imageResponseBytes": "13909",
-  "javascriptResponseBytes": "247214",
-  "otherResponseBytes": "8804",
-  "numberJsResources": 6,
-  "numberCssResources": 2
- },
- "formattedResults": {
-  "locale": "en_US",
-  "ruleResults": {
-    "AvoidBadRequests": {
-      "localizedRuleName": "Avoid bad requests",
-      "ruleImpact": 0.0
-    },
-    "MinifyJavaScript": {
-      "localizedRuleName": "Minify JavaScript",
-      "ruleImpact": 0.1417,
-      "urlBlocks": [
-      {
-        "header": {
-       "format": "Minifying the following JavaScript resources could reduce their size by $1 ($2% reduction).",
-       "args": [
-        {
-         "type": "BYTES",
-         "value": "1.3KiB"
-        },
-        {
-         "type": "INT_LITERAL",
-         "value": "0"
-        }
-       ]
-        },
-        "urls": [
-        {
-          "result": {
-         "format": "Minifying $1 could save $2 ($3% reduction).",
-         "args": [
-          {
-           "type": "URL",
-           "value": "http://code.google.com/js/codesite_tail.pack.04102009.js"
-          },
-          {
-           "type": "BYTES",
-           "value": "717B"
-          },
-          {
-           "type": "INT_LITERAL",
-           "value": "1"
-          }
-         ]
-        }
-       },
-       {
-        "result": {
-         "format": "Minifying $1 could save $2 ($3% reduction).",
-         "args": [
-          {
-           "type": "URL",
-           "value": "http://www.gmodules.com/ig/proxy?url\u003dhttp%3A%2F%2Fjqueryjs.googlecode.com%2Ffiles%2Fjquery-1.2.6.min.js"
-          },
-          {
-           "type": "BYTES",
-           "value": "258B"
-          },
-          {
-           "type": "INT_LITERAL",
-           "value": "0"
-          }
-         ]
-        }
-       }
-      ]
-     }
-    ]
-   },
-   "SpriteImages": {
-    "localizedRuleName": "Combine images into CSS sprites",
-    "ruleImpact": 0.0
-   }
-  }
- },
- "version": {
-  "major": 1,
-  "minor": 11
- }
-};
-
 
 

@@ -2,6 +2,7 @@
   padding:0;
   margin:0;
   font-family: 'Roboto', sans-serif;
+  /*outline: red solid 1px;*/
 }
 
 .clearfix {
@@ -15,7 +16,7 @@
 
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  color: #483000;
   line-height: 48px;
   display: inline;
 }
@@ -23,15 +24,15 @@ h1 {
 h2 {
   font-weight: bold;
   font-size: 24px;
-  color: #999999;
+  color: #483000;
   line-height: 29px;
   padding: 10px;
 }
 
+/*style at a glance; online classes*/
 h3 {
-  font-style: italic;
   font-size: 20px;
-  color: #000000;
+  color: 9C6A06;
   line-height: 22px;
 }
 
@@ -42,7 +43,9 @@ h4 {
   line-height: 17px;
 }
 
-h2, h3, h4, h5 {
+h2, 
+h4, 
+h5 {
   padding:10px;
   padding-left: 5%;
   padding-right: 5%;
@@ -52,7 +55,7 @@ h2, h3, h4, h5 {
 .date-text {
   font-style: italic;
   font-size: 14px;
-  color: #999999;
+  color: #FFD091;
   line-height: 16px;
   float: left;
 }
@@ -60,7 +63,7 @@ h2, h3, h4, h5 {
 .location-text {
   font-style: italic;
   font-size: 14px;
-  color: #999999;
+  color: #AC5B02;
   line-height: 16px;
   float: right;
 
@@ -73,7 +76,7 @@ p {
 }
 
 a {
-  color: #1199C3;
+  color: #7F4F00;
   text-decoration: none;
   margin-top: 10px;
   display: block;
@@ -87,36 +90,49 @@ a {
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: #481C00;
   display: none;
+  float: left;
+  padding: 20px;
+}
+
+#skills {
+  color: #481C00;
+  float: right;
+  padding: 20px;
 }
 
 .orange {
-  background-color: #F5AE23;
+  background-color: #FF9421;
 }
 
 .orange-text {
-  color: #F5AE23;
+  color: #964E00;
 }
 
 .white-text {
   font-weight: bold;
-  color: #FFFFFF;
+  color: #FFD09E;
 }
 
 .gray {
-  background-color: #F3F3F3;
+  background-color: #EEB089;
   padding-bottom: 10px;
   clear:both;
 }
 
+.white {
+  background-color: #DC7200;
+}
+
 .dark-gray {
-  background-color: #4A4A4A;
+  background-color: #EB9762;
 }
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background: url(http://wowslider.com/sliders/demo-10/data/images/garden.jpg);
+  background-size: cover;
 }
 
 .flex-box {
@@ -142,12 +158,18 @@ ul {
 .biopic {
   float: left;
   padding: 10px;
-  width: 200px;
+  width: 150px;
+  height: 180px;
   display: none;
+ 
 }
 
 img {
+  display: block;
   padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 /* Bar chart stuff */
